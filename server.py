@@ -104,10 +104,13 @@ def saveImg():
     image = image.resize((28, 28))
     pixel_values = list(image.getdata())
     label = request.form["doodle"]
-    with open("data/doodle_data.csv", "a", newline="") as csvfile:
+    with open("./data/doodle_data.csv", "a", newline="") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow([label] + pixel_values)
-
+    with open("./data/doodle_data.csv", mode="r") as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            print(row[0])
     return redirect("/")
 
 
